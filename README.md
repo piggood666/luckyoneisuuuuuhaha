@@ -229,7 +229,7 @@
         // --- 音效系統 (使用 Web Audio API 原生合成) ---
         let audioCtx;
 
-        // 變更：改回完全同步的初始化函數！徹底保留點擊事件的 Gesture 權限
+        // 同步初始化函數，杜絕任何非同步所造成的事件連結遺失
         function initAudio() {
             try {
                 if (!audioCtx) {
@@ -324,7 +324,7 @@
             pool = [...names];
         }
 
-        // 變更：移除了非同步 async/await，改用完全同步的 click 流程，徹底解鎖瀏覽器音訊
+        // 100% 同步按鈕點擊觸發，直接擊破瀏覽器的音效限制
         function startDraw() {
             if (isDrawing) return;
             
